@@ -98,9 +98,9 @@ const TicketChat = () => {
               Ticket Insights
             </h2>
 
-            <p>Status: {ticket.status}</p>
-            <p>Priority: {ticket.priority}</p>
-            <p>Category: {ticket.category}</p>
+  <p>Status: {ticket?.status || "N/A"}</p>
+  <p>Priority: {ticket?.priority || "N/A"}</p>
+  <p>Category: {ticket?.category || "N/A"}</p>
           </div>
         </div>
       </PageWrapper>
