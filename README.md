@@ -1,35 +1,69 @@
-# BookLeaf Support Portal
+# 📚 BookLeaf Support Portal
 
-## Overview
-BookLeaf Support Portal is a full-stack internal support management platform built for a fictional self-publishing company.
+A full-stack internal support management platform built for a fictional self-publishing company.
 
-The platform allows:
-
-### Authors
-- View royalty/book details
-- Raise support tickets
-- Chat with support team
-- Receive AI-generated ticket suggestions
-
-### Admins
-- Manage incoming tickets
-- Filter tickets by status/priority
-- Add internal notes
-- Assign tickets
-- Respond in real time
+BookLeaf Support Portal enables authors to raise publishing-related support requests while providing administrators with tools to efficiently manage, track, and resolve tickets. The platform also includes AI-powered ticket assistance and real-time communication.
 
 ---
 
-# Tech Stack
+## 🚀 Features
 
-## Frontend
+### Authors
+
+- View books and royalty information
+- Create support tickets
+- Track ticket status
+- Real-time chat with support team
+- AI-powered ticket assistance
+- Secure authentication
+
+### Admins
+
+- Manage support tickets
+- Filter by status and priority
+- Assign tickets
+- Add internal notes
+- Update ticket statuses
+- Real-time communication with authors
+- Dashboard overview and analytics
+
+---
+
+## 🔒 Security
+
+### JWT Authentication
+
+- Secure login system
+- Protected API routes
+- Role-based authorization
+
+### Single Device Login Restriction
+
+To improve security, only **one active session per account** is allowed.
+
+When a user logs in from a new device or PC:
+
+- Previous sessions are invalidated
+- Multiple simultaneous logins are prevented
+- Credential sharing risks are reduced
+- Author and admin data remain protected
+
+This feature was intentionally implemented as an additional security measure.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
 - React (Vite)
 - Tailwind CSS
 - Axios
 - React Context API
 - Socket.IO Client
 
-## Backend
+### Backend
+
 - Node.js
 - Express.js
 - MongoDB Atlas
@@ -38,16 +72,224 @@ The platform allows:
 - JWT Authentication
 - Groq LLM API
 
-## Deployment
+### Deployment
+
 - Frontend: Vercel
 - Backend: Render
 - Database: MongoDB Atlas
 
 ---
 
-# Local Setup
+## 📂 Project Structure
 
-## 1. Clone Repository
+### Frontend
+
+```bash
+src/
+├── api/
+├── components/
+├── context/
+├── pages/
+├── routes/
+└── assets/
+```
+
+### Backend
+
+```bash
+src/
+├── controllers/
+├── middleware/
+├── models/
+├── routes/
+├── services/
+├── sockets/
+├── utils/
+└── server.js
+```
+
+---
+
+## 🏗️ Architecture Decisions
+
+### Why MERN Stack?
+
+The MERN stack was chosen because it provides:
+
+- Fast full-stack development
+- Strong JavaScript ecosystem
+- Easy frontend-backend integration
+- Flexible MongoDB document structure
+- Real-time communication through Socket.IO
+
+### Frontend Decisions
+
+#### Context API
+
+Used for:
+
+- Authentication state
+- Socket connection state
+
+Chosen over Redux because:
+
+- Smaller project scope
+- Less boilerplate
+- Faster implementation
+
+#### Reusable Components
+
+Examples:
+
+- StatCard
+- StatusBadge
+- PriorityPill
+- FancyDropdown
+- LoadingSpinner
+
+Benefits:
+
+- Consistency
+- Maintainability
+- Reusability
+
+### Backend Decisions
+
+Separation of concerns:
+
+- Routes → Endpoint mapping
+- Controllers → Request handling
+- Services → Business logic & AI integration
+- Models → Database schemas
+- Middleware → Authentication & error handling
+- Sockets → Real-time communication
+
+Benefits:
+
+- Scalability
+- Maintainability
+- Easier debugging
+
+---
+
+## 🤖 AI Integration
+
+### Provider
+
+Groq LLM API
+
+### Model
+
+```bash
+llama3-70b-8192
+```
+
+### Purpose
+
+AI assists authors while creating support tickets by suggesting:
+
+- Possible solutions
+- Next actions
+- Publishing-related guidance
+
+### Prompt Strategy
+
+```text
+You are a publishing support assistant.
+
+Suggest helpful next actions for this author issue.
+
+Keep responses concise, professional, and relevant to BookLeaf publishing workflows.
+```
+
+### Error Handling
+
+Handled scenarios:
+
+- Missing API key
+- API timeout
+- Invalid responses
+- Rate limits
+- Provider failures
+
+Fallback response:
+
+```js
+AI suggestion unavailable right now.
+Please contact support manually.
+```
+
+### Cost Optimization
+
+- Minimal prompt size
+- Limited context sent to AI
+- AI invoked only during ticket assistance
+- No AI calls during dashboard or listing operations
+
+---
+
+## ⚡ Real-Time Features
+
+Socket.IO powers:
+
+- Live ticket updates
+- Real-time chat
+- Status synchronization
+- Instant admin-author communication
+
+---
+
+## 📖 API Documentation
+
+### Local
+
+```bash
+http://localhost:5000/api-docs
+```
+
+### Production
+
+```bash
+https://your-render-backend.onrender.com/api-docs
+```
+
+---
+
+## 🔌 API Endpoints
+
+### Authentication
+
+```http
+POST /api/auth/login
+```
+
+### Books
+
+```http
+GET /api/books/my-books
+```
+
+### Tickets
+
+```http
+GET /api/tickets
+POST /api/tickets
+GET /api/tickets/:id
+POST /api/tickets/:id/respond
+```
+
+### Admin
+
+```http
+GET /api/admin/dashboard
+PATCH /api/admin/tickets/:id
+```
+
+---
+
+## 💻 Local Setup
+
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/raunaque21278/Bookleaf.git
@@ -56,7 +298,7 @@ cd Bookleaf
 
 ---
 
-## 2. Backend Setup
+### 2. Backend Setup
 
 ```bash
 cd backend
@@ -93,7 +335,7 @@ npm run seed
 
 ---
 
-## 3. Frontend Setup
+### 3. Frontend Setup
 
 ```bash
 cd frontend
@@ -114,235 +356,24 @@ npm run dev
 ```
 
 Frontend:
+
 ```bash
 http://localhost:5173
 ```
 
 Backend:
+
 ```bash
 http://localhost:5000
 ```
 
 ---
 
-# Architecture Decisions
+## 🚀 Deployment
 
-## Why MERN Stack?
-The MERN stack was selected because:
+### Backend (Render)
 
-- Fast full-stack development
-- Strong JavaScript ecosystem
-- Easy API/frontend integration
-- MongoDB flexibility for ticket + book document models
-- Real-time communication via Socket.IO
-
----
-
-## Frontend Architecture
-
-Folder structure:
-
-```bash
-src/
-  api/
-  components/
-  context/
-  pages/
-  routes/
-```
-
-### Decisions
-
-### Context API
-Used for:
-- Authentication state
-- Socket connection state
-
-Chosen over Redux because:
-- Smaller project scope
-- Less boilerplate
-- Faster implementation
-
-### Reusable UI Components
-Examples:
-- StatCard
-- StatusBadge
-- PriorityPill
-- FancyDropdown
-- LoadingSpinner
-
-Benefits:
-- consistency
-- maintainability
-- reusability
-
----
-
-## Backend Architecture
-
-Folder structure:
-
-```bash
-src/
-  controllers/
-  models/
-  routes/
-  middleware/
-  services/
-  sockets/
-  utils/
-```
-
-### Why this structure?
-
-Separation of concerns:
-
-- Routes → endpoint mapping
-- Controllers → request handling
-- Services → business logic / AI integration
-- Models → database schemas
-- Middleware → auth / errors
-- Sockets → real-time events
-
-Benefits:
-- scalable
-- maintainable
-- easier debugging
-
----
-
-# AI Integration
-
-## Provider
-Groq LLM API
-
-Model used:
-
-```bash
-llama3-70b-8192
-```
-
----
-
-## Prompt Strategy
-
-AI helps authors while creating support tickets.
-
-Prompt includes:
-- ticket title
-- ticket description
-- issue context
-- internal publishing support knowledge
-
-Example prompt:
-
-```text
-You are a publishing support assistant.
-
-Suggest helpful next actions for this author issue.
-
-Keep responses concise, professional, and relevant to BookLeaf publishing workflows.
-```
-
-Why:
-- domain-specific suggestions
-- focused outputs
-- less hallucination risk
-
----
-
-## Error Handling
-
-Handled cases:
-- API timeout
-- invalid AI response
-- missing API key
-- rate limits
-- provider failures
-
-Fallback response:
-
-```js
-AI suggestion unavailable right now.
-Please contact support manually.
-```
-
-This ensures ticket creation continues even if AI fails.
-
----
-
-## Cost Management
-
-### Prompt minimization
-Only essential context is sent.
-
-Avoid:
-- full conversation history
-- redundant metadata
-
-### Controlled invocation
-AI only runs during ticket assistance.
-
-Not triggered for:
-- dashboard loading
-- ticket listing
-- polling actions
-
-### Efficient provider
-Groq was selected for:
-- fast inference
-- lower cost
-- simple integration
-
----
-
-# API Documentation
-
-Swagger docs available at:
-
-Local:
-```bash
-http://localhost:5000/api-docs
-```
-
-Production:
-```bash
-https://your-render-backend.onrender.com/api-docs
-```
-
-Core endpoints:
-
-## Auth
-```http
-POST /api/auth/login
-```
-
-## Books
-```http
-GET /api/books/my-books
-```
-
-## Tickets
-```http
-GET /api/tickets
-POST /api/tickets
-GET /api/tickets/:id
-POST /api/tickets/:id/respond
-```
-
-## Admin
-```http
-GET /api/admin/dashboard
-PATCH /api/admin/tickets/:id
-```
-
----
-
-# Deployment
-
-## Backend (Render)
-
-Environment variables:
+Environment Variables:
 
 ```env
 MONGO_URI=
@@ -353,11 +384,9 @@ CLIENT_URL=
 NODE_ENV=production
 ```
 
----
+### Frontend (Vercel)
 
-## Frontend (Vercel)
-
-Environment variables:
+Environment Variables:
 
 ```env
 VITE_API_URL=
@@ -366,95 +395,85 @@ VITE_SOCKET_URL=
 
 ---
 
-# Known Limitations
+## ⚠️ Known Limitations
 
-## 1. No File Attachments
-Currently ticket attachments are not supported.
+### No File Attachments
 
-Future improvements:
-- manuscript uploads
-- invoice uploads
-- screenshots
+Currently unsupported:
 
----
+- Manuscript uploads
+- Screenshots
+- Invoice uploads
 
-## 2. Limited AI Context
+### Limited AI Context
+
 AI only uses immediate ticket information.
 
-Future:
-- ticket history awareness
-- personalized author context
+### No Role Management UI
 
----
+Roles are currently seeded manually.
 
-## 3. No Role Management UI
-Roles are seeded manually.
+### Basic Analytics
 
-Future:
-- admin user management dashboard
-
----
-
-## 4. Basic Analytics
 Dashboard currently provides limited metrics.
 
-Future:
-- SLA tracking
-- ticket trend analysis
-- response performance reports
-
----
-
-## 5. Simplified Authentication
-JWT authentication is implemented.
+### Simplified Authentication
 
 Missing:
-- refresh tokens
-- password reset
-- email verification
 
----
+- Refresh tokens
+- Password reset
+- Email verification
 
-## 6. No Automated Testing
+### No Automated Testing
+
 Due to assignment time constraints.
 
-Future:
-- Jest
-- Supertest
-- React Testing Library
-
 ---
 
-# Future Improvements
-
-With more development time:
+## 🔮 Future Improvements
 
 - Docker support
-- CI/CD pipeline
+- CI/CD pipelines
 - Redis caching
+- Email notifications
 - AI ticket summarization
-- email notifications
-- audit logs
-- advanced search
-- granular permissions
+- AI response suggestions
+- Audit logs
+- Advanced search
+- Role management dashboard
+- Granular permissions
+- File uploads
 
 ---
 
-# Demo Credentials
+## 🎯 Demo Credentials
 
-## Admin
-```bash
+### Admin
+
+```text
 Email: admin@bookleaf.com
 Password: admin123
 ```
 
-## Author
-```bash
+### Author
+
+```text
 Email: any seeded author email
 Password: author123
 ```
 
 ---
 
-# Author
+## 👨‍💻 Author
+
 **Raunaque Khan**
+
+Built to demonstrate:
+
+- MERN Stack Development
+- Real-Time Systems with Socket.IO
+- AI Integration using Groq
+- Authentication & Security
+- REST API Design
+- Scalable Architecture
