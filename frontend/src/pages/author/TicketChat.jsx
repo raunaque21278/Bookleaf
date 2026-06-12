@@ -98,19 +98,9 @@ const TicketChat = () => {
               Ticket Insights
             </h2>
 
-            {/* <p>Status: {ticket.status}</p>
+            <p>Status: {ticket.status}</p>
             <p>Priority: {ticket.priority}</p>
             <p>Category: {ticket.category}</p>
-
-            {ticket.aiDraft && (
-              <div className="mt-6 bg-blue-50 p-4 rounded-xl">
-                <h3 className="font-bold mb-2">
-                  AI Suggestion
-                </h3>
-
-                <p>{ticket.aiDraft}</p>
-              </div>
-            )} */}
           </div>
         </div>
       </PageWrapper>
