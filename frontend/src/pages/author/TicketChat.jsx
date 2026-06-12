@@ -98,7 +98,7 @@ const TicketChat = () => {
               Ticket Insights
             </h2>
 
-            <p>Status: {ticket.status}</p>
+            {/* <p>Status: {ticket.status}</p>
             <p>Priority: {ticket.priority}</p>
             <p>Category: {ticket.category}</p>
 
@@ -110,7 +110,7 @@ const TicketChat = () => {
 
                 <p>{ticket.aiDraft}</p>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </PageWrapper>
